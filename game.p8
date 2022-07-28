@@ -1,34 +1,8 @@
 pico-8 cartridge // http://www.pico-8.com
 version 36
 __lua__
-
-game_objects = {}
-
-function _init()
-	foreach(game_objects, 
-        function(go) 
-            if go.init != nil then
-                go:init()
-            end
-        end)
-end
-
-function _update()
-    foreach(game_objects, move_actor)
-end
-
-function _draw()
-    foreach(game_objects, draw_actor)
-end
-
-function move_actor(actor)
-end
-
-function draw_actor(actor)
-end
-
 -- page 1
-#include page1.lua
+#include main.lua
 -->8
 -- page 2
 #include page2.lua
