@@ -9,7 +9,7 @@ function laser()
     sfx(4)
 end
 
-function gun()
+function gun_sound()
     sfx(5)
 end
 function pain()

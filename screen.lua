@@ -1,5 +1,7 @@
 screen = {}
 
+score = 20
+
 function show_game()
     cls()
     screen.update = update_game
@@ -28,6 +30,7 @@ function draw_menu()
     print("one bear can save the city...", 5, 80, 14)
     print("bear!", 55, 90, 12)
     print("press z to start", 30, 110, 7)
+    score = 0
 end
 
 function update_game()
@@ -39,10 +42,14 @@ function update_game()
             end
         end)
     foreach(game_objects, move_actor)
-    spawn_bee()
+    if(score < 20) then
+        spawn_bee()
+    end
     move_bees()
     update_user_sprite()
     update_lazers()
+    score += 0.1
+    update_rockets()
     check_dead_bear()
 end
 
@@ -67,7 +74,8 @@ function draw_game()
     for actor in all(game_objects) do
         spr(actor.sprite,actor.x,actor.y,actor.width,actor.height, actor.flip_x, actor.flip_y)
     end
-
     foreach(bees, draw_bee)
+    print("sCORE:"..score, 95, 5, 7)
     draw_lazers()
+    draw_rockets()
 end 
