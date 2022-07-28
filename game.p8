@@ -8,6 +8,7 @@ __lua__
 #include user.lua
 #include music.lua
 #include lazer.lua
+#include boss.lua
 #include gun.lua
 #include collisions.lua
 __gfx__
