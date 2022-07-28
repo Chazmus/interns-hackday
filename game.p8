@@ -1,22 +1,10 @@
 pico-8 cartridge // http://www.pico-8.com
 version 36
 __lua__
--- page 1
 #include main.lua
--->8
--- page 2
-#include bees.lua
--->8
--- page 3
 #include map.lua
--->8
--- page 4
-#include page4.lua
--->8
--- page 5
+#include bees.lua
 #include user.lua
--->8
--- page 6
 #include music.lua
 __gfx__
 00000000ecdcecdcedcdedcdeeeeeeeeeee000eee000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000
