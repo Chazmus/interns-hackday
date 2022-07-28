@@ -15,7 +15,6 @@ function _init()
             end
         end)
     user_spawn()
-    init_map()
 end
 
 function init_colours()
@@ -34,12 +33,10 @@ function _update()
     foreach(game_objects, move_actor)
     spawn_bee()
     move_bees()
-    update_map()
 end
 
 function _draw()
     cls()
-    draw_map()
 	foreach(game_objects, 
         function(go) 
             if go.draw != nil then
