@@ -17,6 +17,7 @@ end
 
 function _update()
     foreach(game_objects, move_actor)
+    user_input()
 end
 
 function _draw()
@@ -50,7 +51,7 @@ function user_input()
 end
 
 -- page 1
-#include page1.lua
+#include main.lua
 -->8
 -- page 2
 #include page2.lua
