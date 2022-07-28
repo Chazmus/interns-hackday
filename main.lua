@@ -20,9 +20,9 @@ end
 
 function _draw()
     cls()
-     draw_map()
+    draw_map()
     for actor in all(game_objects) do
-        spr(actor.sprite,actor.x,actor.y)
+        spr(actor.sprite,actor.x,actor.y, actor.sprite_width, actor.sprite_height)
     end
    
 end

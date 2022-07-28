@@ -7,7 +7,7 @@ function user_input()
     end
 
     if (btn(3)) then  -- down
-        player.y = min(118, player.y+1)
+        player.y = min(127 - (player.sprite_height * 8), player.y+1)
     end
 
     if (btn(1)) then -- right
@@ -22,9 +22,11 @@ end
 
 function user_spawn()
 -- spawns user og pos
-    player.sprite=2
+    player.sprite=65
+    player.sprite_width = 2
+    player.sprite_height = 2
     player.x=0
-    player.y=118
+    player.y=127 - (player.sprite_height * 8)
     add(game_objects,player)
 
 end
