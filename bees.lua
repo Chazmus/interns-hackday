@@ -14,16 +14,17 @@ function spawn_bee()
             bee.sprites = {4, 6}
             bee.height = 2
             bee.width = 2
-            bee.hasLazer = false
-        bee.deathsprites = {80, 96, 112}
+            bee.hasLazer = true
+            bee.deathsprites = {103, 105, 107}
         else
             bee.sprite = 1
             bee.sprites = {1, 2}
             bee.height = 1
             bee.width = 1
             bee.hasLazer = false
-        bee.deathsprites = {103, 105, 107}
+            bee.deathsprites = {80, 96, 112}
         end
+
         add(bees, bee)
     end
 end
@@ -33,12 +34,13 @@ function move_bees()
     tick += 1
 end
 
-function move_bee(bee)    
+function move_bee(bee)  
+    bee.tick += 1
+
     if bee.alive then
         if (bee.x < -tile_width) then 
             del(bees, bee)
         else
-            bee.tick += 1
             bee.x -= 1.5
         end
 
@@ -48,8 +50,8 @@ function move_bee(bee)
             bee.y += 1
         end
 
-        if(bee.hasLazer and (bee.tick % 60) == 0) then
-            fire_lazer(bee, -90, -4, 11)
+        if(bee.hasLazer and (bee.tick % 30) == 0) then
+            fire_lazer(bee, -90, 4, 11)
         end
     else
         if bee.sprite == bee.deathsprites[2] then
@@ -74,16 +76,16 @@ function draw_bee(bee)
         end
     end
 
-    if (bee.alive == false) then
-        if (bee.sprite == bee.deathsprites[0]) then
-            bee.sprite = bee.deathsprites[1]
-        elseif (bee.sprite == bee.deathsprites[1]) then
-            bee.sprite = bee.deathsprites[2]
+    if ((bee.tick % 5) == 0) then
+        if (bee.alive == false) then
+            if (bee.sprite == bee.deathsprites[1]) then
+                bee.sprite = bee.deathsprites[2]
+            elseif (bee.sprite == bee.deathsprites[2]) then
+                bee.sprite = bee.deathsprites[3]
+            else
+                bee.sprite = bee.deathsprites[1]
+            end
         else
-            bee.sprite = bee.deathsprites[0]
-        end
-    else
-        if ((bee.tick % 5) == 0) then
             if bee.sprite == 1 then 
                 bee.sprite = bee.sprites[1]
             else 

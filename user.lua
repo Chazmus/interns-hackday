@@ -46,7 +46,7 @@ function user_spawn()
     player.width=2
     player.x=0
     player.y=127-(player.height*8)
-    player.speed = 1
+    player.speed = 2
     player.weapons = {
         rocket = {},
         lazer = {

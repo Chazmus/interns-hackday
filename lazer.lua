@@ -32,7 +32,7 @@ function draw_lazers()
         pset(lazer.x, lazer.y , lazer.colour)
         for i=0,4 do
             local offset = getOffset(i, lazer.angle)
-            pset(lazer.x - offset.x, lazer.y - offset.y, 12)
+            pset(lazer.x - offset.x, lazer.y - offset.y, lazer.colour)
         end
     end
 end
