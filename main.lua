@@ -11,6 +11,7 @@ end
 
 function _update()
     foreach(game_objects, move_actor)
+    spawn_bee()
 end
 
 function _draw()
