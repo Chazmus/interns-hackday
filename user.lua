@@ -5,6 +5,7 @@ gun_order = {97, 226, 99, 224}
 current_sprite = 0
 fire_cycle = 0
 tick_counter = 0
+lzr_cooldown = 0
 
 function user_input()
 -- player movements, up, down, left and right
@@ -28,7 +29,13 @@ function user_input()
         fire_cycle = 1
     end
     if (btn(fire2)) then
-        laser()
+        if(lzr_cooldown == 0) then
+            laser()
+            fire_lazer(player, 90, 4)
+            lzr_cooldown = 10
+        else
+            lzr_cooldown = max(0, lzr_cooldown - 1)
+        end
     end
 end
 

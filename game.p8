@@ -6,6 +6,7 @@ __lua__
 #include bees.lua
 #include user.lua
 #include music.lua
+#include lazer.lua
 __gfx__
 00000000ecdcecdcedcdedcdeeeeeeeeeee000eee000eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee000000000000000000000000
 00000000eecdcdceeedcecdeeeeeeeeeee0dcd0e0dcd0eeeee0000eee0000eeeeeeeeeeeeeeeeeeeeee0000000000eeeeeeeeeee000000000000000000000000

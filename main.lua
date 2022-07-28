@@ -34,6 +34,7 @@ function _update()
     spawn_bee()
     move_bees()
     update_user_sprite()
+    update_lazers()
 end
 
 function _draw()
@@ -49,11 +50,12 @@ function _draw()
     end
 
     foreach(bees, draw_bee)
+    draw_lazers()
 end
 
 function move_actor(actor)
 end
 
 function draw_actor(actor)
-    spr(actor.sprite,actor.x,actor.y)
+    spr(actor.sprite, actor.x, actor.y)
 end
