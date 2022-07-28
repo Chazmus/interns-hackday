@@ -47,6 +47,7 @@ end
 
 function kill_bee(bee)
     bee.alive = false
+    pain_sound()
 end
 
 function draw_bee(bee)

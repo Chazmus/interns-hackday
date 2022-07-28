@@ -12,7 +12,7 @@ end
 function gun_sound()
     sfx(5)
 end
-function pain()
+function pain_sound()
     sfx(6)
 end
 
