@@ -57,7 +57,12 @@ function draw_game()
     cls()
 
     if game_over then
-        stop('YOU DIE')
+        -- show screen
+        player.flip_y = true
+       spriteEnd = 197
+        
+        spr(spriteEnd,40,40,8,4)
+        stop()
     end
 
 	foreach(game_objects, 
@@ -67,7 +72,7 @@ function draw_game()
             end
         end)
     for actor in all(game_objects) do
-        spr(actor.sprite,actor.x,actor.y,actor.width,actor.height)
+        spr(actor.sprite,actor.x,actor.y,actor.width,actor.height, actor.flip_x, actor.flip_y)
     end
     foreach(bees, draw_bee)
     print("sCORE:"..score, 95, 5, 7)

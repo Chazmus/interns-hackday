@@ -31,7 +31,7 @@ end
 
 function move_rocket(rocket)    
     if (rocket.x > 200) then 
-        del(rocket)
+        del(rockets, rocket)
     else
         rocket.x += rocket.speed
         rocket.speed += 0.2
@@ -39,12 +39,9 @@ function move_rocket(rocket)
 
     foreach(bees,  function(bee) 
             if (checkForCollision(rocket, bee)) then
-
                 kill_bee(bee)
-                del(rocket)
-
+                del(rockets, rocket)
             end
-            
         end)
 
 end
@@ -65,5 +62,3 @@ function gun()
     add(rockets, rocket)
 
 end
-
---add(game_objects,rockets)

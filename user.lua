@@ -18,7 +18,7 @@ function user_input()
     end
 
     if (btn(right)) then
-        player.x = min(63, player.x + player.speed)
+        player.x = min(120, player.x + player.speed)
     end
 
     if (btn(left)) then
@@ -55,6 +55,8 @@ function user_spawn()
             spread  = 10
         }
     }
+    player.flip_x = false
+    player.flip_y = false
     add(game_objects,player)
 end
 
