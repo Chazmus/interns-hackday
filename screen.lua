@@ -34,6 +34,7 @@ function update_game()
     spawn_bee()
     move_bees()
     update_user_sprite()
+    update_lazers()
 end
 
 function draw_game()
@@ -49,4 +50,5 @@ function draw_game()
     end
 
     foreach(bees, draw_bee)
+    draw_lazers()
 end 
