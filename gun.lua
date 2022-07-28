@@ -36,6 +36,17 @@ function move_rocket(rocket)
         rocket.x += rocket.speed
         rocket.speed += 0.2
     end
+
+    foreach(bees,  function(bee) 
+            if (checkForCollision(rocket, bee)) then
+
+                kill_bee(bee)
+                del(rocket)
+
+            end
+            
+        end)
+
 end
 
 function gun()
