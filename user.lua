@@ -19,6 +19,12 @@ function user_input()
         player.x = max(0, player.x-1)
     end
 
+    if (btn(fire1)) then
+        gun()
+    end
+    if (btn(fire2)) then
+        laser()
+    end
 end
 
 function user_spawn()
