@@ -22,7 +22,7 @@ end
 
 function user_spawn()
 -- spawns user og pos
-    player.sprite=1
+    player.sprite=2
     player.x=0
     player.y=118
     add(game_objects,player)

@@ -20,10 +20,11 @@ end
 
 function _draw()
     cls()
+     draw_map()
     for actor in all(game_objects) do
         spr(actor.sprite,actor.x,actor.y)
     end
-    draw_map()
+   
 end
 
 function move_actor(actor)
