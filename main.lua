@@ -47,7 +47,7 @@ function _draw()
             end
         end)
     for actor in all(game_objects) do
-        spr(actor.sprite,actor.x,actor.y, actor.sprite_width, actor.sprite_height)
+        spr(actor.sprite,actor.x,actor.y,actor.width,actor.height)
     end
 
     foreach(bees, draw_bee)
