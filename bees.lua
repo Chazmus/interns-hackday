@@ -1,5 +1,5 @@
 bees = {}
-spawn_rate = 2
+spawn_rate = 1
 
 function spawn_bee()
     if(time() % (1 / spawn_rate) == 0) then 
