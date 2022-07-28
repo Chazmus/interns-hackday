@@ -15,6 +15,7 @@ function _init()
             end
         end)
     user_spawn()
+    show_menu()
 end
 
 function init_colours()
@@ -23,32 +24,11 @@ function init_colours()
 end
 
 function _update()
-    user_input()
-	foreach(game_objects, 
-        function(go) 
-            if go.update != nil then
-                go:update()
-            end
-        end)
-    foreach(game_objects, move_actor)
-    spawn_bee()
-    move_bees()
-    update_user_sprite()
+    screen.update()
 end
 
 function _draw()
-    cls()
-	foreach(game_objects, 
-        function(go) 
-            if go.draw != nil then
-                go:draw()
-            end
-        end)
-    for actor in all(game_objects) do
-        spr(actor.sprite,actor.x,actor.y,actor.width,actor.height)
-    end
-
-    foreach(bees, draw_bee)
+    screen.draw()
 end
 
 function move_actor(actor)
