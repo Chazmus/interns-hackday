@@ -18,7 +18,7 @@ function user_input()
     end
 
     if (btn(right)) then
-        player.x = min(63, player.x + player.speed)
+        player.x = min(120, player.x + player.speed)
     end
 
     if (btn(left)) then
