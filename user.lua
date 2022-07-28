@@ -31,8 +31,8 @@ function user_input()
     if (btn(fire2)) then
         if(lzr_cooldown == 0) then
             laser()
-            fire_lazer(player, 90, 4)
-            lzr_cooldown = 10
+            fire_lazer(player, 90 + (rnd(player.weapons.lazer.spread) - 5), player.weapons.lazer.speed)
+            lzr_cooldown = player.weapons.lazer.cooldown
         else
             lzr_cooldown = max(0, lzr_cooldown - 1)
         end
@@ -47,8 +47,15 @@ function user_spawn()
     player.x=0
     player.y=127-(player.height*8)
     player.speed = 1
+    player.weapons = {
+        rocket = {},
+        lazer = {
+            speed = 4,
+            cooldown = 10,
+            spread  = 10
+        }
+    }
     add(game_objects,player)
-
 end
 
 function update_user_sprite()
