@@ -6,6 +6,9 @@ screen_width = 128
 screen_height = 128
 tile_width = 8
 
+game_over = false
+
+
 function _init()
     init_colours()
 	foreach(game_objects, 

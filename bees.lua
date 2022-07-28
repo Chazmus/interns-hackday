@@ -6,6 +6,8 @@ function spawn_bee()
         half_screen = screen_width/2
         bee = {
             sprite=1,
+            height=1,
+            width=1,
             x=screen_width,
             y=rnd(screen_height - tile_width - 2) + 1,
             tick = 0
