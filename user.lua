@@ -31,7 +31,7 @@ function user_input()
     if (btn(fire2)) then
         if(lzr_cooldown == 0) then
             laser()
-            fire_lazer(player, 90 + (rnd(player.weapons.lazer.spread) - 5), player.weapons.lazer.speed)
+            fire_lazer(player, 90 + (rnd(player.weapons.lazer.spread) - 5), player.weapons.lazer.speed, 12)
             lzr_cooldown = player.weapons.lazer.cooldown
         else
             lzr_cooldown = max(0, lzr_cooldown - 1)

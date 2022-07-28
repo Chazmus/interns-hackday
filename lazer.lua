@@ -1,12 +1,12 @@
 lazers = {}
 
-function fire_lazer(actor, angle, speed) 
+function fire_lazer(actor, angle, speed, colour) 
     add(lazers, {
         x = actor.x + (actor.width * 4),
         y = actor.y + (actor.height * 4),
         angle = angle,
         speed = speed,
-        colour = 12,
+        colour = colour,
         life = 60,
         source = actor -- use this to prevent self-fire collision
     })
