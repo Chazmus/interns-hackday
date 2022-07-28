@@ -49,10 +49,17 @@ function update_game()
     update_user_sprite()
     update_lazers()
     score += 0.1
+    update_rockets()
+    check_dead_bear()
 end
 
 function draw_game()
     cls()
+
+    if game_over then
+        stop('YOU DIE')
+    end
+
 	foreach(game_objects, 
         function(go) 
             if go.draw != nil then
@@ -65,4 +72,5 @@ function draw_game()
     foreach(bees, draw_bee)
     print("sCORE:"..score, 95, 5, 7)
     draw_lazers()
+    draw_rockets()
 end 
