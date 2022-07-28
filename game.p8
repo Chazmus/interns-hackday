@@ -1,7 +1,9 @@
 pico-8 cartridge // http://www.pico-8.com
 version 36
 __lua__
-
+player = {}
+player.x = 0
+player.y= 0
 game_objects = {}
 
 function _init()
@@ -25,6 +27,26 @@ function move_actor(actor)
 end
 
 function draw_actor(actor)
+end
+
+function user_input()
+-- player movements, up, down, left and right
+    if (btn(2)) then  -- up
+        player.y = max(0, player.y-1)
+    end
+
+    if (btn(3)) then  -- down
+        player.y = min(127, player.y+1)
+    end
+
+    if (btn(1)) then -- right
+        player.x = min(63, player.x+1)
+    end
+
+    if (btn(0)) then  -- left
+        player.x = max(0, player.x-1)
+    end
+
 end
 
 -- page 1
