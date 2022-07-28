@@ -1,20 +1,21 @@
 player = {}
+left,right,up,down,fire1,fire2 = 0,1,2,3,4,5
 
 function user_input()
 -- player movements, up, down, left and right
-    if (btn(2)) then  -- up
+    if (btn(up)) then
         player.y = max(0, player.y-1)
     end
 
-    if (btn(3)) then  -- down
+    if (btn(down)) then  -- down
         player.y = min(127-(player.height*8), player.y+1)
     end
 
-    if (btn(1)) then -- right
+    if (btn(right)) then
         player.x = min(63, player.x+1)
     end
 
-    if (btn(0)) then  -- left
+    if (btn(left)) then
         player.x = max(0, player.x-1)
     end
 
