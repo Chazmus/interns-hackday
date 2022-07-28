@@ -43,11 +43,20 @@ function update_game()
     move_bees()
     update_user_sprite()
     update_lazers()
+<<<<<<< HEAD
     update_rockets()
+=======
+    check_dead_bear()
+>>>>>>> ba0090576b41f19dfa8e5846470c3b5b758fe5ce
 end
 
 function draw_game()
     cls()
+
+    if game_over then
+        stop('YOU DIE')
+    end
+
 	foreach(game_objects, 
         function(go) 
             if go.draw != nil then
