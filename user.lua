@@ -55,6 +55,8 @@ function user_spawn()
             spread  = 10
         }
     }
+    player.flip_x = false
+    player.flip_y = false
     add(game_objects,player)
 end
 
