@@ -1,6 +1,9 @@
 game_objects = {}
+black=0
+pink=14
 
 function _init()
+    init_colours()
 	foreach(game_objects, 
         function(go) 
             if go.init != nil then
@@ -9,6 +12,11 @@ function _init()
         end)
     user_spawn()
     init_map()
+end
+
+function init_colours()
+    palt(black, false)
+    palt(pink, true)
 end
 
 function _update()
