@@ -8,7 +8,7 @@ __lua__
 #include bees.lua
 -->8
 -- page 3
-#include page3.lua
+#include map.lua
 -->8
 -- page 4
 #include page4.lua
