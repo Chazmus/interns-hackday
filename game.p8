@@ -17,7 +17,7 @@ __lua__
 #include user.lua
 -->8
 -- page 6
-#include user.lua
+#include music.lua
 __gfx__
 00000000ecdcecdcedcdedcdeeeeeeeeeee000eee000eeeeeeeeeeeeeeeeeeeeeeeeeeee00000000000000000000000000000000000000000000000000000000
 00000000eecdcdceeedcecdeeeeeeeeeee0dcd0e0dcd0eeeee0000eee0000eeeeeeeeeee00000000000000000000000000000000000000000000000000000000

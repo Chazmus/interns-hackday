@@ -1,6 +1,13 @@
 game_objects = {}
+black=0
+pink=14
+
+screen_width = 128
+screen_height = 128
+tile_width = 8
 
 function _init()
+    init_colours()
 	foreach(game_objects, 
         function(go) 
             if go.init != nil then
@@ -9,6 +16,11 @@ function _init()
         end)
     user_spawn()
     init_map()
+end
+
+function init_colours()
+    palt(black, false)
+    palt(pink, true)
 end
 
 function _update()
@@ -21,6 +33,7 @@ function _update()
         end)
     foreach(game_objects, move_actor)
     spawn_bee()
+    move_bees()
     update_map()
 end
 
@@ -36,7 +49,8 @@ function _draw()
     for actor in all(game_objects) do
         spr(actor.sprite,actor.x,actor.y,actor.width,actor.height)
     end
-   
+
+    foreach(bees, draw_bee)
 end
 
 function move_actor(actor)
