@@ -1,8 +1,8 @@
 bees = {}
-spawn_rate = 1
+tick = 0
 
 function spawn_bee()
-    if(time() % (1 / spawn_rate) == 0) then 
+    if(tick % 10 == 0) then 
         half_screen = screen_width/2
         bee = {
             sprite=1,
@@ -16,18 +16,16 @@ end
 
 function move_bees()
     foreach(bees, move_bee)
+    tick += 1
+    printh(tick)
 end
 
 function move_bee(bee)    
     if (bee.x < -tile_width) then 
         del(bees, bee)
     else
-        if bee.tick == 100 then
-            bee.tick = 1
-        else
-            bee.tick += 1
-            bee.x -= 1.5
-        end
+        bee.tick += 1
+        bee.x -= 1.5
     end
 end
 
