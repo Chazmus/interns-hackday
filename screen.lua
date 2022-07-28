@@ -18,8 +18,16 @@ end
 
 function draw_menu()
     cls()
-    print("bears and bees", 6, 40, 14)
-    print("press z to start", 30, 100, 7)
+    print("bears and bees", 35, 10, 10)
+
+    print("in the town of bristol,", 5, 30, 14)
+    print("after too many artisan bee", 5, 40, 14)
+    print("keepers led to an explosion", 5, 50, 14)
+    print("in the bee population,", 5, 60, 14)
+    print("only one person, nay,", 5, 70, 14)
+    print("one bear can save the city...", 5, 80, 14)
+    print("bear!", 55, 90, 12)
+    print("press z to start", 30, 110, 7)
 end
 
 function update_game()
