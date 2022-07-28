@@ -35,6 +35,7 @@ function _update()
     spawn_bee()
     move_bees()
     update_map()
+    update_user_sprite()
 end
 
 function _draw()
