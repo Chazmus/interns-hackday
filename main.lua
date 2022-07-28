@@ -34,7 +34,7 @@ function _draw()
             end
         end)
     for actor in all(game_objects) do
-        spr(actor.sprite,actor.x,actor.y)
+        spr(actor.sprite,actor.x,actor.y,actor.width,actor.height)
     end
    
 end
