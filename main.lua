@@ -8,12 +8,14 @@ function _init()
             end
         end)
     user_spawn()
+    init_map()
 end
 
 function _update()
     user_input()
     foreach(game_objects, move_actor)
     spawn_bee()
+    update_map()
 end
 
 function _draw()
@@ -21,6 +23,7 @@ function _draw()
     for actor in all(game_objects) do
         spr(actor.sprite,actor.x,actor.y)
     end
+    draw_map()
 end
 
 function move_actor(actor)
