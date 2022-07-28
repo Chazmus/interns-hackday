@@ -10,22 +10,22 @@ lzr_cooldown = 0
 function user_input()
 -- player movements, up, down, left and right
     if (btn(up)) then
-        player.y = max(0, player.y-1)
+        player.y = max(0, player.y - player.speed)
     end
 
     if (btn(down)) then  -- down
-        player.y = min(127-(player.height*8), player.y+1)
+        player.y = min(127-(player.height*8), player.y + player.speed)
     end
 
     if (btn(right)) then
-        player.x = min(63, player.x+1)
+        player.x = min(63, player.x + player.speed)
     end
 
     if (btn(left)) then
-        player.x = max(0, player.x-1)
+        player.x = max(0, player.x - player.speed)
     end
 
-    if (btn(fire1)) then
+    if (btnp(fire1)) then
         fire_cycle = 1
     end
     if (btn(fire2)) then
@@ -46,6 +46,7 @@ function user_spawn()
     player.width=2
     player.x=0
     player.y=127-(player.height*8)
+    player.speed = 1
     add(game_objects,player)
 
 end
