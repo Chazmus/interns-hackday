@@ -43,6 +43,7 @@ function update_game()
     move_bees()
     update_user_sprite()
     update_lazers()
+    update_rockets()
 end
 
 function draw_game()
@@ -59,4 +60,5 @@ function draw_game()
 
     foreach(bees, draw_bee)
     draw_lazers()
+    draw_rockets()
 end 
