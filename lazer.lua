@@ -1,4 +1,16 @@
 lazers = {}
+lazer_manager = {}
+add(game_objects, lazer_manager)
+
+function lazer_manager:init()
+
+end
+function lazer_manager:update()
+    update_lazers()
+end
+function lazer_manager:draw()
+    draw_lazers()
+end
 
 function fire_lazer(actor, angle, speed, colour) 
     add(lazers, {

@@ -1,45 +1,36 @@
-boss_manager = {}
+boss = {}
+add(game_objects, boss)
 
-boss = {
-    sprites = {4, 6},
-    x=90,
-    y=screen_height/2,
-    tick = 0
-}
-
-add(game_objects, boss_manager)
-
-function boss_manager:init()
+function boss:init()
+    -- boss.sprites = {12}
+    -- boss.sprite_index = 0
+    boss.sprite = 12
+    boss.width = 
+    boss.height = 4
+    boss.x = 90
+    boss.y = screen_height/2 - (boss.height * 4)
+    boss.tick = 0
+    boss.active = false
 end
 
-function boss_manager:update()
-    --if(score > 20) then
+function boss:update()
+    if(boss.active) then
         if (boss.x > 90) then
             boss.x -= 1
             boss.tick += 1
         end
-    --end
+        -- boss.sprite_index = ((boss.sprite_index + 1) % count(boss.sprites)) + 1
+    end
 end
 
-function boss_manager:draw()
-    --if(score > 20) then
-
-        score = 1
-
+function boss:draw()
+    if(boss.active) then
         if boss.tick % 4 == 0 then
             boss.y -= 1
         elseif bee.tick % 2 == 0 then
             boss.y += 1
         end
-    
-        if boss.tick % 5 == 0 then
-            if boss.sprite == 1 then 
-                boss.sprite = 2
-            else 
-                boss.sprite = 1
-            end
-        end
 
-        spr(boss.sprites, boss.x, boss.y)
-    --end
+        spr(boss.sprite, boss.x, boss.y, boss.width, boss.height)
+    end
 end
