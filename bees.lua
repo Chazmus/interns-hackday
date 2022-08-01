@@ -1,15 +1,31 @@
 bees = {}
-tick = 0
+bees_manager = {}
+add(game_objects, bees_manager)
+
+function bees_manager:init()
+
+end
+
+function bees_manager:update()
+    if(score < 20) then
+        spawn_bee()
+    end
+    foreach(bees, move_bee)
+end
+
+function bees_manager:draw()
+    foreach(bees, draw_bee)
+end
 
 function spawn_bee()
-    if(tick % 10 == 0) then 
+    if(gametick % 10 == 0) then 
         bee = {}
         bee.x = screen_width
         bee.y = rnd(screen_height - tile_width - 2) + 1
-        bee.tick = 0
+        bee.gametick = 0
         bee.alive = true
 
-        if(tick % 100 == 0) then
+        if(gametick % 100 == 0) then
             bee.sprite = 4
             bee.sprites = {4, 6}
             bee.height = 2
@@ -29,13 +45,8 @@ function spawn_bee()
     end
 end
 
-function move_bees()
-    foreach(bees, move_bee)
-    tick += 1
-end
-
 function move_bee(bee)  
-    bee.tick += 1
+    bee.gametick += 1
 
     if bee.alive then
         if (bee.x < -tile_width) then 
@@ -44,13 +55,13 @@ function move_bee(bee)
             bee.x -= 1.5
         end
 
-        if bee.tick % 4 == 0 then
+        if bee.gametick % 4 == 0 then
             bee.y -= 1
-        elseif bee.tick % 2 == 0 then
+        elseif bee.gametick % 2 == 0 then
             bee.y += 1
         end
 
-        if(bee.hasLazer and (bee.tick % 30) == 0) then
+        if(bee.hasLazer and (bee.gametick % 30) == 0) then
             fire_lazer(bee, -90, 4, 11)
         end
     else
@@ -67,7 +78,7 @@ end
 
 function draw_bee(bee)
     if bee.alive then
-        if bee.tick % 5 == 0 then
+        if bee.gametick % 5 == 0 then
             if bee.sprite == 1 then 
                 bee.sprite = 2
             else 
@@ -76,7 +87,7 @@ function draw_bee(bee)
         end
     end
 
-    if ((bee.tick % 5) == 0) then
+    if ((bee.gametick % 5) == 0) then
         if (bee.alive == false) then
             if (bee.sprite == bee.deathsprites[1]) then
                 bee.sprite = bee.deathsprites[2]
