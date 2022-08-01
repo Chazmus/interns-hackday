@@ -1,97 +1,112 @@
-bees = {}
-tick = 0
+Bee = {}
+function Bee:new(x, y, hp, sprite, sprites, width, height, has_lazer, deathsprites)
+    o = {
+        x = x,
+        y = y,
+        iframe = 0,
+        hp = hp,
+        sprite = sprite,
+        sprites = sprites,
+        width = width,
+        height = height,
+        has_lazer = has_lazer,
+        deathsprites = deathsprites,
+        render = true,
+        bob = true
+    }
+    setmetatable(o, self)
+    self.__index = self
+    self.__type = 'Bee'
+    self.__collisions = true
+	return o
+end
 
-function spawn_bee()
-    if(tick % 10 == 0) then 
-        bee = {}
-        bee.x = screen_width
-        bee.y = rnd(screen_height - tile_width - 2) + 1
-        bee.tick = 0
-        bee.alive = true
+function Bee:init()
+    -- register callback every 2 ticks that toggles render if iframes active
+    every(2, function() self.check_iframe_flicker(self) end)
 
-        if(tick % 100 == 0) then
-            bee.sprite = 4
-            bee.sprites = {4, 6}
-            bee.height = 2
-            bee.width = 2
-            bee.hasLazer = true
-            bee.deathsprites = {103, 105, 107}
+    -- apply bobbing motion every 2 ticks
+    every(2, function()
+        if(self.bob) then
+            self.y -= 1
         else
-            bee.sprite = 1
-            bee.sprites = {1, 2}
-            bee.height = 1
-            bee.width = 1
-            bee.hasLazer = false
-            bee.deathsprites = {80, 96, 112}
+            self.y += 1
         end
+        self.bob = not self.bob
+    end)
 
-        add(bees, bee)
+    -- If bee has lazer, shoot every 30 ticks
+    if(self.hasLazer) then
+        every(30, function()
+            fire_lazer(self, -90, 4, 11)
+        end)
     end
+
+    -- register callback every 5 ticks that toggles the bee animation
+    every(5, function() self.toggle_animation(self) end)
 end
 
-function move_bees()
-    foreach(bees, move_bee)
-    tick += 1
-end
-
-function move_bee(bee)  
-    bee.tick += 1
-
-    if bee.alive then
-        if (bee.x < -tile_width) then 
-            del(bees, bee)
-        else
-            bee.x -= 1.5
-        end
-
-        if bee.tick % 4 == 0 then
-            bee.y -= 1
-        elseif bee.tick % 2 == 0 then
-            bee.y += 1
-        end
-
-        if(bee.hasLazer and (bee.tick % 30) == 0) then
-            fire_lazer(bee, -90, 4, 11)
-        end
+function Bee:update()
+    self.iframe = max(0, self.iframe - 1)
+    if (self.hp > 0) then
+        self.move(self)
     else
-        if bee.sprite == bee.deathsprites[2] then
-            del(bees, bee)
+        -- only kill after death animation has played out
+        if self.sprite == self.deathsprites[2] then
+            self:kill()
         end
     end
 end
 
-function kill_bee(bee)
-    bee.alive = false
-    pain_sound()
+function Bee:draw()
+    if(self.render) then
+        spr(self.sprite, self.x, self.y, self.width, self.height)
+    end
 end
 
-function draw_bee(bee)
-    if bee.alive then
-        if bee.tick % 5 == 0 then
-            if bee.sprite == 1 then 
-                bee.sprite = 2
+function Bee:toggle_animation()
+    -- if(self.iframe == 0) then
+        self.render = true
+        if (self.hp > 0) then
+            if self.sprite == self.sprites[2] then 
+                self.sprite = self.sprites[1]
             else 
-                bee.sprite = 1
-            end
-        end
-    end
-
-    if ((bee.tick % 5) == 0) then
-        if (bee.alive == false) then
-            if (bee.sprite == bee.deathsprites[1]) then
-                bee.sprite = bee.deathsprites[2]
-            elseif (bee.sprite == bee.deathsprites[2]) then
-                bee.sprite = bee.deathsprites[3]
-            else
-                bee.sprite = bee.deathsprites[1]
+                self.sprite = self.sprites[2]
             end
         else
-            if bee.sprite == 1 then 
-                bee.sprite = bee.sprites[1]
-            else 
-                bee.sprite = bee.sprites[2]
+            if (self.sprite == self.deathsprites[1]) then
+                self.sprite = self.deathsprites[2]
+            elseif (self.sprite == self.deathsprites[2]) then
+                self.sprite = self.deathsprites[3]
+            else
+                self.sprite = self.deathsprites[1]
             end
         end
+    -- end
+end
+
+function Bee:check_iframe_flicker()
+    if(self.iframe > 0) then
+        self.render = not self.render
     end
-    spr(bee.sprite, bee.x, bee.y, bee.width, bee.height)
+end
+
+function Bee:move()
+    if (self.x < -tile_width) then 
+        self:kill()
+    else
+        self.x -= game_map.map_spd + 0.5
+    end
+end
+
+function Bee.hurt(self, amount)
+    if(self.iframe == 0) then
+        self.hp = max(0, self.hp - amount)
+        self.iframe = 2
+        pain_sound()
+    end
+end
+
+function Bee:kill()
+    del(game_objects, self)
 end

@@ -1,33 +1,48 @@
-function checkForCollision(object1, object2)
-    box1 = createBox(object1)
-    box2 = createBox(object2)
+function checkForLazerCollision(object, lazer)
+    return isPointInBox(createBox(object), lazer)
+end
 
-    hasCollision = intersection(box1, box2)
-    hasCollision = hasCollision or intersection(box2, box1)
-    return hasCollision
+function checkForCollision(object1, object2)
+    return intersection(createBox(object1), createBox(object2))
 end
 
 function createBox(o)
-    box = {}
+    box = {
+        tl={x = o.x, y = o.y},
+        tr={x = o.x, y = o.y},
+        bl={x = o.x, y = o.y},
+        br={x = o.x, y = o.y},
+    }
     
-    box.bl={o.x,o.y+o.height*8}
-    box.br={o.x+o.width*8,o.y+o.height*8}
-    box.tl={o.x,o.y}
-    box.tr={o.x+o.width*8,o.y}
+    if(o.height ~= nil and o.width ~= nil) then
+        box.tr.x += (o.width * tile_width)
+        box.bl.y += (o.height * tile_height)
+        box.br.x += (o.width * tile_width)
+        box.br.y += (o.height * tile_height)
+    end
     
     return box
 end
 
-function intersection(box1,box2)
-    hasIntersection = isPointInBox(box1, box2.tl)
-    hasIntersection = hasIntersection or isPointInBox(box1, box2.tr)
-    hasIntersection = hasIntersection or isPointInBox(box1, box2.bl)
-    hasIntersection = hasIntersection or isPointInBox(box1, box2.br)
-    return hasIntersection
+function intersection(box1, box2)
+    return (
+            (isPointInBox(box1, box2.tl)
+            or isPointInBox(box1, box2.tr)
+            or isPointInBox(box1, box2.bl)
+            or isPointInBox(box1, box2.br))
+        or 
+            (isPointInBox(box2, box1.tl)
+            or isPointInBox(box2, box1.tr)
+            or isPointInBox(box2, box1.bl)
+            or isPointInBox(box2, box1.br))
+    )
 end
 
-function isPointInBox(box,point)
-    isInXRange = point[1] >= box.tl[1] and point[1] <= box.tr[1]
-    isInYRange = point[2] >= box.tl[2] and point[2] <= box.bl[2]
+function isPointInBox(box, point)
+    if (box == nil or point == nil) then
+        return false
+    end
+    isInXRange = point.x >= box.tl.x and point.x <= box.tr.x
+    isInYRange = point.y >= box.tl.y and point.y <= box.bl.y
     return isInXRange and isInYRange
 end

@@ -1,45 +1,37 @@
-boss_manager = {}
-
-boss = {
-    sprites = {4, 6},
-    x=90,
-    y=screen_height/2,
-    tick = 0
-}
-
-add(game_objects, boss_manager)
-
-function boss_manager:init()
+boss_score = 100
+Boss = Bee:new(screen_width, ((screen_height / 2) - 8), 15, 12, {12}, 4, 4, true, {12})
+function Boss:new()
+    o = {
+        speed = 2,
+        dy = -2
+    }
+    setmetatable(o, self)
+    self.__index = self
+    self.__type = 'Boss'
+    self.__collisions = true
+	return o    
 end
 
-function boss_manager:update()
-    --if(score > 20) then
-        if (boss.x > 90) then
-            boss.x -= 1
-            boss.tick += 1
-        end
-    --end
+function Boss:init()
+    every(15, function() fire_lazer(self, -90, 4, 8) end)
 end
 
-function boss_manager:draw()
-    --if(score > 20) then
+function Boss:update()
+    -- boss enters screen from the right
+    if (self.x > 90) then
+        self.x -= 1
+    end
 
-        score = 1
+    -- Boss strafes up and down
+    self.y += self.dy
+    if(self.y == 0) then
+        self.dy = self.speed
+    end
+    if (self.y == (screen_height - (self.height * tile_height))) then
+        self.dy = -self.speed
+    end
+end
 
-        if boss.tick % 4 == 0 then
-            boss.y -= 1
-        elseif bee.tick % 2 == 0 then
-            boss.y += 1
-        end
-    
-        if boss.tick % 5 == 0 then
-            if boss.sprite == 1 then 
-                boss.sprite = 2
-            else 
-                boss.sprite = 1
-            end
-        end
-
-        spr(boss.sprites, boss.x, boss.y)
-    --end
+function Boss:draw()
+    spr(self.sprite, self.x, self.y, self.width, self.height)
 end

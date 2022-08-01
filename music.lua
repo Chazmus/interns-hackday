@@ -1,10 +1,17 @@
-music_manager = {}
+Music = {}
+function Music:new()
+    o = {}
+    setmetatable(o, self)
+    self.__index = self
+    self.__type = 'Music'
+    self.__collisions = false
+	return o
+end
 
-add(game_objects, music_manager)
-
-function game_music()
+function Music:init()
     music(0)
 end
+
 function laser() 
     sfx(4)
 end
@@ -14,8 +21,4 @@ function gun_sound()
 end
 function pain_sound()
     sfx(6)
-end
-
-function music_manager:init()
-    game_music()
 end
