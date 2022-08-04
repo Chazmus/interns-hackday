@@ -15,12 +15,25 @@ function init_game()
         bee:init() 
     end)
 
-    -- -- every 30 ticks spawn a pickup
-    -- every(30, function()
-    --     local pickup = Pickup:new(screen_width, rnd(screen_height - tile_height - 2) + 1, rnd(count(pickup_types)) + 1)
-    --     pickup:init()
-    --     add(game_objects, pickup)
-    -- end)
+    -- every 30 ticks attempt to spawn a pickup
+    every(30, function()
+        local pickup_type = 0
+        local effectid = rnd(100) + 1
+
+        if(effectid <= 15) then
+            pickup_type = 1 -- Lazer pickup [15%]
+        elseif(effectid <= 20) then
+            pickup_type = 3 -- Slow bees [5%]
+        elseif(effectid <= 60) then
+            pickup_type = 2 -- HP pickup [40%]
+        end
+
+        if(pickup_type > 0) then
+            local pickup = Pickup:new(screen_width, rnd(screen_height - tile_height - 2) + 1, pickup_types[pickup_type])
+            pickup:init()
+            add(game_objects, pickup)
+        end
+    end)
 
     -- every 100 ticks spawn a big bee!
     every(100, function() 

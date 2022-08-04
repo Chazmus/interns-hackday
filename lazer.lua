@@ -5,13 +5,13 @@ function Lazer:new(source, angle, speed, colour)
         dmg = player.weapons.lazer.dmg
     end
 
-    -- local x_offset = 0
-    -- if(speed > 0) then
-    --     x_offset = (source.width * 8)
-    -- end
+    local x_offset = (source.width * 8)
+    if(angle < 0) then
+        x_offset = 0
+    end
 
     o = {
-        x = source.x, -- + x_offset,
+        x = source.x + x_offset,
         y = source.y + (source.height * 4),
         angle = angle,
         speed = speed,

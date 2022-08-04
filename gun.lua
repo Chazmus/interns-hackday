@@ -18,7 +18,7 @@ function Rocket:new(source, speed)
         height = 1,
         width = 2,
         source = source,
-        sprite_index = 0,
+        sprite_index = 1,
         flip_x = (speed < 0),
         flip_y = false,
         dmg = dmg

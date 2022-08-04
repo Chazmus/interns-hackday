@@ -23,8 +23,9 @@ function Player:new()
             lazer = {
                 dmg = 1,
                 speed = 4,
-                cooldown = 10,
-                spread  = 10
+                cooldown = 20,
+                spread = 10,
+                lazers_per_shot = 1
             }
         },
         cooldowns = {
@@ -62,17 +63,16 @@ function Player:draw()
 end
 
 function Player.check_collisions(self)
-    for pickup in all(pickups) do
-        if(checkForCollision(self, pickup)) then
-            apply_pickup(pickup)
-            break
-        end
-    end
     for object in all(game_objects) do
         if(object.__type == 'Bee' or object.type == 'Boss') then
             if(checkForCollision(self, object)) then
                 self:hurt(object.hp)
                 object:hurt(self.hp)
+                break
+            end
+        elseif(object.__type == 'Pickup') then
+            if(checkForCollision(self, object)) then
+                apply_pickup(object)
                 break
             end
         end
@@ -126,17 +126,21 @@ function user_input()
     if (btn(fire2)) then
         if(player.cooldowns.lazer == 0) then
             laser()
-            fire_lazer(player, 90, player.weapons.lazer.speed, 12)
+            for i = 1,player.weapons.lazer.lazers_per_shot do
+                fire_lazer(player, 90 + (rnd(player.weapons.lazer.spread) - 5), player.weapons.lazer.speed, 12)
+            end
             player.cooldowns.lazer = player.weapons.lazer.cooldown
         end
     end
 end
 
 function apply_pickup(pickup)
-    if(pickup.type_id == 1) then -- lazer_cooldown
-        player.weapons.lazer.cooldown = max(2, player.weapons.lazer.cooldown - 2)
-    elseif(pickup.type_id == 2) then -- player_hp
-        player.hp += 5
+    local effectid = rnd(100) + 1
+    for effect in all(pickup.effects) do 
+        if(effectid <= effect.likelihood) then
+            effect.effect()
+        end
     end
-    del(pickups, pickup)
+    
+    del(game_objects, pickup)
 end

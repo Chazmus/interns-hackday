@@ -14,7 +14,7 @@ end
 
 function Map:update()
     if(score < boss_score) then
-        self.map_spd = 0.5 + (0.5 * (score / 30))
+        self.map_spd = min(3, max(0.5, 0.5 + (0.5 * (score / 30))))
     else
         self.map_spd = 1
     end

@@ -22,6 +22,10 @@ function Bee:new(x, y, hp, sprite, sprites, width, height, has_lazer, deathsprit
 end
 
 function Bee:init()
+    ---- TODO: These are being called after the bee dies! 
+    --- This system needs some reworking to tie the callbacks
+    --- to individual entities
+
     -- register callback every 2 ticks that toggles render if iframes active
     every(2, function() self.check_iframe_flicker(self) end)
 
@@ -36,7 +40,7 @@ function Bee:init()
     end)
 
     -- If bee has lazer, shoot every 30 ticks
-    if(self.hasLazer) then
+    if(self.has_lazer) then
         every(30, function()
             fire_lazer(self, -90, 4, 11)
         end)
@@ -65,24 +69,22 @@ function Bee:draw()
 end
 
 function Bee:toggle_animation()
-    -- if(self.iframe == 0) then
-        self.render = true
-        if (self.hp > 0) then
-            if self.sprite == self.sprites[2] then 
-                self.sprite = self.sprites[1]
-            else 
-                self.sprite = self.sprites[2]
-            end
-        else
-            if (self.sprite == self.deathsprites[1]) then
-                self.sprite = self.deathsprites[2]
-            elseif (self.sprite == self.deathsprites[2]) then
-                self.sprite = self.deathsprites[3]
-            else
-                self.sprite = self.deathsprites[1]
-            end
+    self.render = true
+    if (self.hp > 0) then
+        if self.sprite == self.sprites[2] then 
+            self.sprite = self.sprites[1]
+        else 
+            self.sprite = self.sprites[2]
         end
-    -- end
+    else
+        if (self.sprite == self.deathsprites[1]) then
+            self.sprite = self.deathsprites[2]
+        elseif (self.sprite == self.deathsprites[2]) then
+            self.sprite = self.deathsprites[3]
+        else
+            self.sprite = self.deathsprites[1]
+        end
+    end
 end
 
 function Bee:check_iframe_flicker()
